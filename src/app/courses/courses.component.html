@@ -17,7 +17,7 @@
           <td>{{ course.id }}</td>
           <td>{{ course.name }}</td>
           <td>{{ course.instructorId }}</td>
-          <td>{{ course.description }}</td>
+          <td>{{ course.description | summary }}</td>
           <td>
             <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
               <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">

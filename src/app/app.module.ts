@@ -24,6 +24,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CourseProfileComponent } from './course-profile/course-profile.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
+import { SummaryPipe } from './pipes/summary.pipe';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { LoginComponent } from './login/login.component';
     UserProfileComponent,
     CourseProfileComponent,
     NotFoundComponent,
-    LoginComponent
+    LoginComponent,
+    SummaryPipe
   ],
   imports: [
     BrowserModule,
