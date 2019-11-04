@@ -1,1 +1,38 @@
-<p>students works!</p>
+<div class="card">
+  <div class="card-header">
+    <h5>Students List</h5>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Birthdate</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.lastName }}</td>
+        <td>{{ student.birthday | date:'mediumDate' }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.phoneNumber }}</td>
+        <td>
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
+                <button class="btn btn-info">View</button>
+            </div>
+            <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
+                <button class="btn btn-danger">Delete</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

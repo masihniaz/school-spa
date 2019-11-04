@@ -8,7 +8,7 @@ import { DataService } from './data.service';
 export class StudentService extends DataService {
 
   constructor(http: HttpClient) {
-    super('https://www.api.com', http);
+    super('http://localhost:4000/api/student', http);
   }
 
 }
