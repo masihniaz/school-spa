@@ -20,6 +20,12 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
+  getOne(id) {
+    const headers = this.getAuthorizationHeader();
+    return this.http.get(`${this.url}/${id}/courses`, { headers })
+      .pipe(catchError(this.handleError));
+  }
+
   create(resource) {
     const headers = this.getAuthorizationHeader();
     return this.http.post(this.url, JSON.stringify(resource), { headers })

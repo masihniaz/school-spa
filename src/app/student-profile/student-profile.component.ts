@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StudentService } from '../services/student.service';
 
 @Component({
   selector: 'app-student-profile',
@@ -8,13 +9,32 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class StudentProfileComponent implements OnInit {
   private id: number;
-  constructor(private route: ActivatedRoute) { }
+  student: any;
+  courses: any;
+  constructor(private route: ActivatedRoute,
+              private service: StudentService,
+              private router: Router) { }
 
   ngOnInit() {
     this.route.paramMap
     .subscribe(params => {
       this.id = +params.get('id');
+      this.service.getOne(this.id)
+        .subscribe(response => {
+          this.student = response;
+          this.courses = this.student.courses;
+        });
     });
+  }
+
+  // navigate to course view
+  onView(id) {
+    this.router.navigate(['courses/', id]);
+  }
+
+  // delete student from course
+  onDelete(id) {
+
   }
 
 }
