@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
 })
 export class StudentsComponent implements OnInit {
   students: any[];
-  constructor(private service: StudentService, private router: Router) { }
+
+  constructor(private service: StudentService,
+              private router: Router) { }
 
   ngOnInit() {
     this.service.getAll()
@@ -18,6 +20,7 @@ export class StudentsComponent implements OnInit {
       });
   }
 
+  // navigate to student profile view
   onView(id) {
     this.router.navigate(['/students/', id]);
   }
