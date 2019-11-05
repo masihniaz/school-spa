@@ -3,24 +3,60 @@
       <h5>User Details</h5>
     </div>
     <div class="container form">
-      <form>
+      <form [formGroup]="form">
         <div class="form-group">
           <div class="row">
             <div class="col col-lg-2">
               <label for="id">ID</label>
-              <input type="number" class="form-control" id="id" placeholder="ID" readonly>
+              <input
+                type="number"
+                class="form-control"
+                formControlName="id"
+                id="id"
+                placeholder="ID"
+                readonly>
+                <div *ngIf="id.touched && id.invalid" class="alert alert-danger">
+                  <div *ngIf="id.errors.required">ID is required.</div>
+                </div>
             </div>
             <div class="col">
               <label for="name">Name</label>
-              <input type="text" class="form-control" id="instructorId" placeholder="Enter Name">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="name"
+                id="instructorId"
+                placeholder="Enter Name">
+                <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+                  <div *ngIf="name.errors.required">Name is required.</div>
+                  <div *ngIf="name.errors.minlength">Name should be minimum {{ name.errors.minlength.requiredLength }} characters.</div>
+                </div>
             </div>
             <div class="col">
               <label for="email">Email</label>
-              <input type="email" class="form-control" id="email" placeholder="Enter Email">
+              <input
+                type="email"
+                class="form-control"
+                formControlName="email"
+                id="email"
+                placeholder="Enter Email">
+                <!-- <div *ngIf="email.pending">Checking for uniqueness...</div> -->
+                <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+                  <div *ngIf="email.errors.required">Email is required.</div>
+                  <div *ngIf="email.errors.email">Email address is invalid.</div>
+                </div>
             </div>
             <div class="col col-lg-2">
               <label for="role">Role</label>
-              <input type="number" class="form-control" id="role" placeholder="Enter Role">
+              <input
+                type="number"
+                class="form-control"
+                formControlName="role"
+                id="role"
+                placeholder="Enter Role">
+                <div *ngIf="role.touched && role.invalid" class="alert alert-danger">
+                  <div *ngIf="role.errors.required">Role is required.</div>
+                </div>
             </div>
           </div>
         </div>

@@ -1,34 +1,121 @@
 <div class="card">
-    <div class="card-header">
-      <h5>Course Details</h5>
-    </div>
-    <div class="container form">
-      <form>
-        <div class="form-group">
-          <div class="row">
-            <div class="col col-lg-2">
-              <label for="id">ID</label>
-              <input type="number" class="form-control" id="id" placeholder="ID" readonly>
-            </div>
-            <div class="col col-lg-2">
-              <label for="instructorId">Instructor ID</label>
-              <input type="text" class="form-control" id="instructorId" placeholder="Instructor ID">
-            </div>
-            <div class="col">
-              <label for="name">Course Name</label>
-              <input type="text" class="form-control" id="name" placeholder="Course Name">
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="row">
-            <div class="col">
-              <label for="description">Description</label>
-              <textarea class="form-control" id="description" rows="4" placeholder="Enter Description"></textarea>
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-      </form>
-    </div>
+  <div class="card-header">
+    <h5>Course Details</h5>
   </div>
+  <div class="container form">
+    <form [formGroup]="form">
+      <div class="form-group">
+        <div class="row">
+          <div class="col col-lg-2">
+            <label for="id">ID</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="id"
+              id="id"
+              placeholder="ID"
+              readonly>
+              <div *ngIf="id.touched && id.invalid" class="alert alert-danger">
+                <div *ngIf="id.errors.required">ID is required.</div>
+              </div>
+          </div>
+          <div class="col col-lg-2">
+            <label for="instructorId">Instructor ID</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="instructorId"
+              id="instructorId"
+              placeholder="Instructor ID">
+              <div *ngIf="instructorId.touched && instructorId.invalid" class="alert alert-danger">
+                  <div *ngIf="instructorId.errors.required">Instructor ID is required.</div>
+                  <div *ngIf="instructorId.errors.pattern">instructor ID should be numeric.</div>
+              </div>
+          </div>
+          <div class="col">
+            <label for="name">Course Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              id="name"
+              placeholder="Course Name">
+              <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+                <div *ngIf="name.errors.required">Course name is required.</div>
+                <div *ngIf="name.errors.minlength">Course name should be minimum {{ name.errors.minlength.requiredLength }} characters.</div>
+              </div>
+          </div>
+          <div class="col col-lg-2">
+            <label for="totalStudents">Total Students</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="totalStudents"
+              id="totalStudents"
+              readonly>
+              <div *ngIf="totalStudents.touched && totalStudents.invalid" class="alert alert-danger">
+                <div *ngIf="totalStudents.errors.pattern">Total students should be numeric.</div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <label for="description">Description</label>
+            <textarea
+              class="form-control"
+              formControlName="description"
+              id="description"
+              rows="5"
+              placeholder="Enter Description"></textarea>
+              <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+                <div *ngIf="description.errors.required">Course description is required.</div>
+                <div *ngIf="description.errors.minlength">Course description should be minimum {{ description.errors.minlength.requiredLength }} characters.</div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Update</button>
+    </form>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <h5>Students List</h5>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Birthdate</th>
+        <th scope="col">Email</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{ student.id }}</td>
+        <td>{{ student.name }}</td>
+        <td>{{ student.lastName }}</td>
+        <td>{{ student.birthday | date:'mediumDate' }}</td>
+        <td>{{ student.email }}</td>
+        <td>{{ student.phoneNumber }}</td>
+        <td>
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
+                <button class="btn btn-info" (click)="onView(student.id)">View</button>
+            </div>
+            <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
+                <button class="btn btn-danger" (click)="onDelete(student.id)">Delete</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

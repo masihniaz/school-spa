@@ -3,7 +3,9 @@ import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { AppErrorHandler } from './common/app-error-handler';
+
 import { StudentService } from './services/student.service';
 import { InstructorService } from './services/instructor.service';
 import { CourseService } from './services/course.service';
@@ -12,6 +14,8 @@ import { DataService } from './services/data.service';
 
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeComponent } from './home/home.component';
 import { CoursesComponent } from './courses/courses.component';
@@ -47,6 +51,8 @@ import { SummaryPipe } from './pipes/summary.pipe';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '',
         component: HomeComponent
@@ -98,7 +104,7 @@ import { SummaryPipe } from './pipes/summary.pipe';
     CourseService,
     UserService,
     DataService,
-    // { provide: ErrorHandler, useClass: AppErrorHandler} // instead of default error handler use custom error handler
+    { provide: ErrorHandler, useClass: AppErrorHandler} // instead of default error handler use custom error handler
   ],
   bootstrap: [AppComponent]
 })
