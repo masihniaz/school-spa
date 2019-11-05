@@ -9,7 +9,7 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  private userId: number;
+  userId: number;
   user: any;
   form = new FormGroup({
     id: new FormControl('', [

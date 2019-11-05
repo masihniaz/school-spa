@@ -10,7 +10,7 @@ import * as moment from 'moment';
   styleUrls: ['./student-profile.component.css']
 })
 export class StudentProfileComponent implements OnInit {
-  private studentId: number;
+  studentId: number;
   student: any;
   courses: any;
   form = new FormGroup({

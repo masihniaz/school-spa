@@ -11,7 +11,7 @@ import * as moment from 'moment';
   styleUrls: ['./instructor-profile.component.css']
 })
 export class InstructorProfileComponent implements OnInit {
-  private instructorId: number;
+  instructorId: number;
   instructor: any;
   courses: any[];
   form = new FormGroup({
