@@ -42,3 +42,7 @@ td {
 .modal.show {
   display: block;
 }
+
+.custom-align {
+  text-align: center;
+}

@@ -9,7 +9,7 @@
           type="button"
           class="btn btn-success btn-sm float-right"
           data-toggle="modal"
-          data-target="#exampleModal"
+          data-target="#courseModal"
           (click)="showModal=true">
           Add Course
         </button>
@@ -24,7 +24,7 @@
         <th scope="col">Name</th>
         <th scope="col">Instructor</th>
         <th scope="col">Description</th>
-        <th scope="col">Action</th>
+        <th scope="col" class="custom-align">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -34,7 +34,7 @@
         <td>{{ course.instructorId }}</td>
         <td>{{ course.description | summary }}</td>
         <td>
-          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
                 <button class="btn btn-info" (click)="onView(course.id)">View</button>
             </div>
@@ -50,7 +50,7 @@
 
 
 <!-- modal component -->
-<div class="modal fade" id="exampleModal" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="courseModal" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">

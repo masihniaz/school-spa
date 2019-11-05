@@ -9,7 +9,7 @@
           type="button"
           class="btn btn-success btn-sm float-right"
           data-toggle="modal"
-          data-target="#exampleModal"
+          data-target="#studentModal"
           (click)="showModal=true">
           Add Student
         </button>
@@ -26,7 +26,7 @@
         <th scope="col">Birthdate</th>
         <th scope="col">Email</th>
         <th scope="col">Phone</th>
-        <th scope="col">Action</th>
+        <th scope="col" class="custom-align">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -38,7 +38,7 @@
         <td>{{ student.email }}</td>
         <td>{{ student.phoneNumber }}</td>
         <td>
-          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+          <div class="btn-toolbar float-right" role="toolbar" aria-label="Toolbar with button groups">
             <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
                 <button class="btn btn-info" (click)="onView(student.id)">View</button>
             </div>
@@ -54,7 +54,7 @@
 
 
 <!-- modal component -->
-<div class="modal fade" id="exampleModal" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="studentModal" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
