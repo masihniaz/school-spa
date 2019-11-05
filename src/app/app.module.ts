@@ -55,10 +55,8 @@ import { FooterComponent } from './footer/footer.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+
     RouterModule.forRoot([
-      { path: '',
-        component: HomeComponent
-      },
       {
         path: 'login',
         component: LoginComponent
@@ -93,6 +91,11 @@ import { FooterComponent } from './footer/footer.component';
       {
         path: 'users',
         component: UsersComponent
+      },
+      { path: '',
+        component: HomeComponent,
+        pathMatch: 'full'
+        // redirectTo: 'home'
       },
       {
         path: '**',

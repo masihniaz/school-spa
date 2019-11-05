@@ -139,7 +139,7 @@
       <tr *ngFor="let course of courses; index as i">
         <td>{{ course.id }}</td>
         <td>{{ course.name }}</td>
-        <td>{{ course.instructorId }}</td>
+        <td><a [routerLink]="['/instructors', course.instructorId]">{{ course.instructorId }}</a></td>
         <td>{{ course.description | summary }}</td>
         <td>
           <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">

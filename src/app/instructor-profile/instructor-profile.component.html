@@ -130,7 +130,6 @@
       <tr>
         <th scope="col">ID</th>
         <th scope="col">Name</th>
-        <th scope="col">Instructor</th>
         <th scope="col">Description</th>
         <th scope="col">Actions</th>
       </tr>
@@ -139,7 +138,6 @@
       <tr *ngFor="let course of courses">
         <td>{{ course.id }}</td>
         <td>{{ course.name }}</td>
-        <td>{{ course.instructorId }}</td>
         <td>{{ course.description | summary }}</td>
         <td>
           <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">

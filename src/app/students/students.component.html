@@ -204,7 +204,7 @@
           class="close"
           data-dismiss="modal"
           aria-label="Close"
-          (click)="showAssignModal=false; form.reset()">
+          (click)="showAssignModal=false; assignForm.reset()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -238,7 +238,7 @@
           type="button"
           class="btn btn-secondary"
           data-dismiss="modal"
-          (click)="showAssignModal=false; form.reset()">Close</button>
+          (click)="showAssignModal=false; assignForm.reset()">Close</button>
         <button
           type="button"
           class="btn btn-primary" [disabled]="assignForm.invalid" (click)="onAssign('a')">Assign</button>
