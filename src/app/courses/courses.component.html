@@ -1,7 +1,22 @@
 <div class="card">
   <div class="card-header">
-    <h5>Courses List</h5>
+    <div class="row">
+      <div class="col col-lg-10">
+        <h5>Courses List</h5>
+      </div>
+      <div class="col col-lg-2 float-right">
+        <button
+          type="button"
+          class="btn btn-success btn-sm float-right"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          (click)="showModal=true">
+          Add Course
+        </button>
+      </div>
+    </div>
   </div>
+
   <table class="table">
     <thead>
       <tr>
@@ -32,3 +47,89 @@
     </tbody>
   </table>
 </div>
+
+
+<!-- modal component -->
+<div class="modal fade" id="exampleModal" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">New course</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="showModal=false">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- modal body -->
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <div class="row">
+              <div class="col col-lg-3">
+                <label for="instructorId">Instructor ID</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  formControlName="instructorId"
+                  id="instructorId"
+                  placeholder="Instructor ID">
+                  <div *ngIf="instructorId.touched && instructorId.invalid" class="alert alert-danger">
+                      <div *ngIf="instructorId.errors.required">Instructor ID is required.</div>
+                      <div *ngIf="instructorId.errors.pattern">instructor ID should be numeric.</div>
+                  </div>
+              </div>
+              <div class="col">
+                <label for="name">Course Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  id="name"
+                  placeholder="Course Name">
+                  <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+                    <div *ngIf="name.errors.required">Course name is required.</div>
+                    <div *ngIf="name.errors.minlength">Course name should be minimum {{ name.errors.minlength.requiredLength }} characters.</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label for="description">Description</label>
+                <textarea
+                  class="form-control"
+                  formControlName="description"
+                  id="description"
+                  rows="5"
+                  placeholder="Enter Description"></textarea>
+                  <div *ngIf="description.touched && description.invalid" class="alert alert-danger">
+                    <div *ngIf="description.errors.required">Course description is required.</div>
+                    <div *ngIf="description.errors.minlength">Course description should be minimum {{ description.errors.minlength.requiredLength }} characters.</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- modal body end -->
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="showModal=false">Close</button>
+        <button
+          type="button"
+          class="btn btn-primary">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+

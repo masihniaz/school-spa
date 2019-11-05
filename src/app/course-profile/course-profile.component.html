@@ -1,7 +1,17 @@
 <div class="card">
   <div class="card-header">
-    <h5>Course Details</h5>
+    <div class="row">
+      <div class="col col-lg-10">
+        <h5>Courses List</h5>
+      </div>
+      <div class="col col-lg-2 float-right">
+        <button type="button" class="btn btn-success btn-sm float-right">
+          Add Course
+        </button>
+      </div>
+    </div>
   </div>
+
   <div class="container form">
     <form [formGroup]="form">
       <div class="form-group">

@@ -1,7 +1,22 @@
 <div class="card">
   <div class="card-header">
-    <h5>Students List</h5>
+    <div class="row">
+      <div class="col col-lg-10">
+        <h5>Students List</h5>
+      </div>
+      <div class="col col-lg-2 float-right">
+        <button
+          type="button"
+          class="btn btn-success btn-sm float-right"
+          data-toggle="modal"
+          data-target="#exampleModal"
+          (click)="showModal=true">
+          Add Student
+        </button>
+      </div>
+    </div>
   </div>
+
   <table class="table">
     <thead>
       <tr>
@@ -35,4 +50,129 @@
       </tr>
     </tbody>
   </table>
+</div>
+
+
+<!-- modal component -->
+<div class="modal fade" id="exampleModal" [ngClass]="{'show': showModal}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">New student</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="showModal=false">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- modal body -->
+      <div class="modal-body">
+        <form [formGroup]="form">
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label for="name">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  id="name"
+                  placeholder="First name">
+                  <div *ngIf="name.touched && name.invalid" class="alert alert-danger">
+                    <div *ngIf="name.errors.required">Name is required.</div>
+                    <div *ngIf="name.errors.minlength">Name should be minimum {{ name.errors.minlength.requiredLength }} characters.</div>
+                  </div>
+              </div>
+              <div class="col">
+                <label for="lastName">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="lastName"
+                  id="lastName"
+                  placeholder="Enter Lastname">
+                  <div *ngIf="lastName.touched && lastName.invalid" class="alert alert-danger">
+                    <div *ngIf="lastName.errors.required">Lastname is required.</div>
+                    <div *ngIf="lastName.errors.minlength">Lastname should be minimum {{ lastName.errors.minlength.requiredLength }} characters.</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label for="email">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  id="email"
+                  placeholder="Enter email">
+                  <!-- <div *ngIf="email.pending">Checking for uniqueness...</div> -->
+                  <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+                    <div *ngIf="email.errors.required">Email is required.</div>
+                    <div *ngIf="email.errors.email">Email address is invalid.</div>
+                  </div>
+              </div>
+              <div class="col">
+                <label for="phoneNumber">Phone Number</label>
+                <input
+                  type="tel"
+                  class="form-control"
+                  formControlName="phoneNumber"
+                  id="phoneNumber"
+                  placeholder="Phone Number">
+                  <div *ngIf="phoneNumber.touched && phoneNumber.invalid" class="alert alert-danger">
+                    <div *ngIf="phoneNumber.errors.required">Phone number is required.</div>
+                    <div *ngIf="phoneNumber.errors.pattern">Phone number should be numeric.</div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="birthday">Birthday</label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="birthday"
+              id="birthday"
+              placeholder="Birthday">
+              <div *ngIf="birthday.touched && birthday.invalid" class="alert alert-danger">
+                <div *ngIf="birthday.errors.required">Birthday is required.</div>
+                <div *ngIf="birthday.errors.notValidDate"> Birthday is an invalid date.</div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="address">Address</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address"
+              id="address"
+              placeholder="Address">
+              <div *ngIf="address.touched && address.invalid" class="alert alert-danger">
+                <div *ngIf="address.errors.required">Address is required.</div>
+                <div *ngIf="address.errors.minlength"> Address should be minimum {{ address.errors.minlength.requiredLength }} characters.</div>
+              </div>
+          </div>
+        </form>
+      </div>
+      <!-- modal body end -->
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="showModal=false">Close</button>
+        <button
+          type="button"
+          class="btn btn-primary">Create</button>
+      </div>
+    </div>
+  </div>
 </div>
