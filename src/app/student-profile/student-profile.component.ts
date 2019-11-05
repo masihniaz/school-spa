@@ -13,6 +13,7 @@ export class StudentProfileComponent implements OnInit {
   studentId: number;
   student: any;
   courses: any;
+  showDeleted = false;
   form = new FormGroup({
     id: new FormControl('', [
       Validators.required,
@@ -76,9 +77,14 @@ export class StudentProfileComponent implements OnInit {
     this.router.navigate(['courses/', id]);
   }
 
-  // delete student from course
-  onDelete(id) {
-
+  // unassign course from student
+  onUnassign(id, index) {
+    const resource = { courseId: id, studentId: this.studentId };
+    this.service.unassign(resource)
+      .subscribe(response => {
+        this.courses.splice(index, 1);
+        this.showDeleted = true;
+      });
   }
 
   onUpdate() {

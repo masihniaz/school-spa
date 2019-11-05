@@ -62,9 +62,15 @@ export class DataService {
   }
 
   unassign(resource) {
+    let endpoint = '';
+    if(this.url.indexOf('student')) {
+      endpoint = this.url.replace('student', 'course');
+    } else {
+      endpoint = this.url;
+    }
     const headers = DataService.getAuthorizationHeader();
     headers.append('Content-Type', 'application/json');
-    return this.http.post(this.url + '/unassign', resource, { headers })
+    return this.http.post(endpoint + '/unassign', resource, { headers })
       .pipe(catchError(this.handleError));
   }
 

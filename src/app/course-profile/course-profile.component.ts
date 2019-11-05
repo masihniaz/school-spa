@@ -70,7 +70,7 @@ export class CourseProfileComponent implements OnInit {
     this.router.navigate(['/students/', id]);
   }
 
-  //
+  // unassign student from course
   onUnassign(id, index) {
     const resource = { courseId: this.courseId, studentId: id };
     this.service.unassign(resource)
