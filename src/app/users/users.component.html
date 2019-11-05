@@ -1,34 +1,34 @@
 <div class="card">
-    <div class="card-header">
-      <h5>Users List</h5>
-    </div>
-    <table class="table">
-      <thead>
-        <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Email</th>
-          <th scope="col">Role</th>
-          <th scope="col">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of users">
-          <td>{{ user.id }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>
-            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-              <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
-                  <button class="btn btn-info" (click)="onView(user.id)">View</button>
-              </div>
-              <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
-                  <button class="btn btn-danger" (click)="onDelete(user.id)">Delete</button>
-              </div>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="card-header">
+    <h5>Users List</h5>
   </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Role</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group btn-group-sm mr-2" role="group" aria-label="First group">
+                <button class="btn btn-info" (click)="onView(user.id)">View</button>
+            </div>
+            <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
+                <button class="btn btn-danger" (click)="onDelete(user.id)">Delete</button>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

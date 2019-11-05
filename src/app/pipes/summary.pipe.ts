@@ -8,7 +8,7 @@ export class SummaryPipe implements PipeTransform {
     if (!value) {
       return null;
     }
-    const charLimit = (limit) ? limit : 50;
+    const charLimit = (limit) ? limit : 70;
     return value.substr(0, charLimit) + '...';
   }
 }
