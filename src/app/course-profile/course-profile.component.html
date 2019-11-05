@@ -1,1 +1,34 @@
-<p>course-profile works!</p>
+<div class="card">
+    <div class="card-header">
+      <h5>Course Details</h5>
+    </div>
+    <div class="container form">
+      <form>
+        <div class="form-group">
+          <div class="row">
+            <div class="col col-lg-2">
+              <label for="id">ID</label>
+              <input type="number" class="form-control" id="id" placeholder="ID" readonly>
+            </div>
+            <div class="col col-lg-2">
+              <label for="instructorId">Instructor ID</label>
+              <input type="text" class="form-control" id="instructorId" placeholder="Instructor ID">
+            </div>
+            <div class="col">
+              <label for="name">Course Name</label>
+              <input type="text" class="form-control" id="name" placeholder="Course Name">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <label for="description">Description</label>
+              <textarea class="form-control" id="description" rows="4" placeholder="Enter Description"></textarea>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+      </form>
+    </div>
+  </div>
