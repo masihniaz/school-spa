@@ -61,6 +61,13 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
+  unassign(resource) {
+    const headers = DataService.getAuthorizationHeader();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.url + '/unassign', resource, { headers })
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: Response) {
     const { status } = error;
     if (status === 400) {

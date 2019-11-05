@@ -12,6 +12,7 @@ export class CourseProfileComponent implements OnInit {
   private courseId: number;
   course: any;
   students: any;
+  showDeleted = false;
   form = new FormGroup({
     id: new FormControl('', [
 
@@ -69,8 +70,14 @@ export class CourseProfileComponent implements OnInit {
     this.router.navigate(['/students/', id]);
   }
 
-  onDelete(id) {
-
+  //
+  onUnassign(id, index) {
+    const resource = { courseId: this.courseId, studentId: id };
+    this.service.unassign(resource)
+      .subscribe(response => {
+        this.students.splice(index, 1);
+        this.showDeleted = true;
+      });
   }
 
   // getter functions to access properties easily on the view
