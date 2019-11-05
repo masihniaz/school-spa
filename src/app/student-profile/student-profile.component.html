@@ -116,7 +116,9 @@
   <div class="card-header">
     <h5>Student Courses</h5>
   </div>
-  <table class="table">
+
+  <div *ngIf="!courses?.length" class="alert alert-info custom-align">Currently there are no courses assigned for this student.</div>
+  <table *ngIf="courses?.length" class="table">
     <thead>
       <tr>
         <th scope="col">ID</th>

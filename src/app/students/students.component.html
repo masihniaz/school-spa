@@ -30,7 +30,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let student of students">
+      <tr *ngFor="let student of students; index as i">
         <td>{{ student.id }}</td>
         <td>{{ student.name }}</td>
         <td>{{ student.lastName }}</td>
@@ -43,7 +43,7 @@
                 <button class="btn btn-info" (click)="onView(student.id)">View</button>
             </div>
             <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
-                <button class="btn btn-danger" (click)="onDelete(student.id)">Delete</button>
+                <button class="btn btn-danger" (click)="onDelete(student.id, i)">Delete</button>
             </div>
           </div>
         </td>
@@ -64,7 +64,7 @@
           class="close"
           data-dismiss="modal"
           aria-label="Close"
-          (click)="showModal=false">
+          (click)="showModal=false; form.reset()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -168,11 +168,22 @@
           type="button"
           class="btn btn-secondary"
           data-dismiss="modal"
-          (click)="showModal=false">Close</button>
+          (click)="showModal=false; form.reset()">Close</button>
         <button
           type="button"
-          class="btn btn-primary">Create</button>
+          class="btn btn-primary" [disabled]="form.invalid" (click)="onCreate()">Create</button>
       </div>
     </div>
   </div>
+</div>
+
+<!-- create re-usable component in the future -->
+<div class="alert alert-warning alert-dismissible fade show" [ngClass]="{ show: showDeleted}">
+  Student deleted!.
+  <button type="button" class="close" data-dismiss="alert" (click)="showDeleted=false">&times;</button>
+</div>
+
+<div class="alert alert-success alert-dismissible fade show" [ngClass]="{ show: showCreated}">
+    Student added.
+    <button type="button" class="close" data-dismiss="alert" (click)="showCreated=false">&times;</button>
 </div>

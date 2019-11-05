@@ -60,7 +60,7 @@
           class="close"
           data-dismiss="modal"
           aria-label="Close"
-          (click)="showModal=false">
+          (click)="showModal=false; form.reset()">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -111,6 +111,36 @@
                 </div>
               </div>
             </div>
+            <div class="form-group">
+              <div class="row">
+                <div class="col">
+                  <label for="password">Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                    id="password"
+                    placeholder="Enter password">
+                    <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+                      <div *ngIf="password.errors.required">Password is required.</div>
+                      <div *ngIf="password.errors.minlength">Password should be minimum {{ password.errors.minlength.requiredLength }} characters.</div>
+                    </div>
+                </div>
+                <div class="col">
+                  <label for="passwd">Confirm Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    formControlName="passwd"
+                    id="passwd"
+                    placeholder="Enter passwd">
+                    <div *ngIf="passwd.touched && passwd.invalid" class="alert alert-danger">
+                      <div *ngIf="passwd.errors.required">Confirm password is required.</div>
+                      <div *ngIf="passwd.errors.equalTo">Confirm passwords do not match.</div>
+                    </div>
+                </div>
+              </div>
+            </div>
           </form>
       </div>
       <!-- modal body end -->
@@ -120,12 +150,23 @@
           type="button"
           class="btn btn-secondary"
           data-dismiss="modal"
-          (click)="showModal=false">Close</button>
+          (click)="showModal=false; form.reset()">Close</button>
         <button
           type="button"
-          class="btn btn-primary">Create</button>
+          class="btn btn-primary" [disabled]="form.invalid" (click)="onCreate()">Create</button>
       </div>
     </div>
   </div>
+</div>
+
+<!-- create re-usable component in the future -->
+<div class="alert alert-warning alert-dismissible fade show" [ngClass]="{ show: showDeleted}">
+  Student deleted!.
+  <button type="button" class="close" data-dismiss="alert" (click)="showDeleted=false">&times;</button>
+</div>
+
+<div class="alert alert-success alert-dismissible fade show" [ngClass]="{ show: showCreated}">
+    Student added.
+    <button type="button" class="close" data-dismiss="alert" (click)="showCreated=false">&times;</button>
 </div>
 

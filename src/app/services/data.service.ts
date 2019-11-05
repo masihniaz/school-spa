@@ -44,7 +44,8 @@ export class DataService {
 
   create(resource) {
     const headers = DataService.getAuthorizationHeader();
-    return this.http.post(this.url, JSON.stringify(resource), { headers })
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(this.url, resource, { headers })
       .pipe(catchError(this.handleError));
   }
 

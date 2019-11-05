@@ -11,14 +11,17 @@ import * as moment from 'moment';
 })
 export class StudentsComponent implements OnInit {
   students: any[];
+  showModal = false;
+  showDeleted = false;
+  showCreated = false;
   form = new FormGroup({
     name: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(3)
     ]),
     lastName: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(3)
     ]),
     email: new FormControl('', [
       Validators.required,
@@ -58,8 +61,26 @@ export class StudentsComponent implements OnInit {
     this.router.navigate(['/students/', id]);
   }
 
-  onDelete(id) {
+  // delete student by calling the API
+  onDelete(id, index) {
+    this.service.delete(id)
+      .subscribe(response => {
+        this.students.splice(index, 1);
+        this.showDeleted = true;
+      });
+  }
 
+  // create new student by calling the API
+  onCreate() {
+    if (this.form.valid) {
+      this.service.create(this.form.value)
+        .subscribe(response => {
+          this.students.push(response);
+          this.showModal = false;
+          this.form.reset();
+          this.showCreated = true;
+        });
+    }
   }
 
   // getter functions to access properties easily on the view

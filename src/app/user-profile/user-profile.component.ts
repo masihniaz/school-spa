@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
     ]),
     name: new FormControl('', [
       Validators.required,
-      Validators.minLength(5)
+      Validators.minLength(3)
     ]),
     email: new FormControl('', [
       Validators.required,

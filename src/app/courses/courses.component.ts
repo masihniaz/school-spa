@@ -10,6 +10,9 @@ import { FormGroup, FormControl, Validators, AbstractControl, ValidationErrors }
 })
 export class CoursesComponent implements OnInit {
   courses: any[];
+  showModal = false;
+  showDeleted = false;
+  showCreated = false;
   form = new FormGroup({
     instructorId: new FormControl('', [
       Validators.required,
@@ -40,9 +43,26 @@ export class CoursesComponent implements OnInit {
     this.router.navigate(['/courses', id]);
   }
 
-  // delete course
-  onDelete(id) {
+  // delete the user
+  onDelete(id, index) {
+    this.service.delete(id)
+      .subscribe(response => {
+        this.courses.splice(index, 1);
+        this.showDeleted = true;
+      });
+  }
 
+  // create new user by calling the API
+  onCreate() {
+    if (this.form.valid) {
+      this.service.create(this.form.value)
+        .subscribe(response => {
+          this.courses.push(response);
+          this.showModal = false;
+          this.form.reset();
+          this.showCreated = true;
+        });
+    }
   }
 
   // getter functions to access properties easily on the view
