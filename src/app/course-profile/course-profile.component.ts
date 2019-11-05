@@ -9,7 +9,8 @@ import { CourseService } from '../services/course.service';
   styleUrls: ['./course-profile.component.css']
 })
 export class CourseProfileComponent implements OnInit {
-  private courseId: number;
+  courseId: number;
+  lecturerId: number;
   course: any;
   students: any;
   showDeleted = false;
@@ -48,6 +49,7 @@ export class CourseProfileComponent implements OnInit {
       this.service.getOne(this.courseId, 'students')
         .subscribe(response => {
           this.course = response;
+          this.lecturerId = this.course.instructorId;
           this.students = this.course.students;
           // set the form values after data is fetched from API
           this.updateFormValues();

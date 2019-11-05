@@ -32,6 +32,8 @@
               </div>
           </div>
           <div class="col col-lg-2">
+            <div class="row">
+            </div>
             <label for="instructorId">Instructor ID</label>
             <input
               type="number"
@@ -39,6 +41,9 @@
               formControlName="instructorId"
               id="instructorId"
               placeholder="Instructor ID">
+              <div class="custom-align">
+                <a [routerLink]="['/instructors', lecturerId]">Go</a>
+              </div>
               <div *ngIf="instructorId.touched && instructorId.invalid" class="alert alert-danger">
                   <div *ngIf="instructorId.errors.required">Instructor ID is required.</div>
                   <div *ngIf="instructorId.errors.pattern">instructor ID should be numeric.</div>

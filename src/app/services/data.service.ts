@@ -20,9 +20,15 @@ export class DataService {
 
   constructor(private url: string, private http: HttpClient) { }
 
-  getAll() {
+  getAll(option?: string) {
+    let endpoint = '';
+    if(option === 'course') {
+      endpoint = this.url.replace('student', 'course');
+    } else {
+      endpoint = this.url;
+    }
     const headers = DataService.getAuthorizationHeader();
-    return this.http.get(this.url + 's', { headers })
+    return this.http.get(endpoint + 's', { headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -71,6 +77,19 @@ export class DataService {
     const headers = DataService.getAuthorizationHeader();
     headers.append('Content-Type', 'application/json');
     return this.http.post(endpoint + '/unassign', resource, { headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  assign(resource) {
+    let endpoint = '';
+    if(this.url.indexOf('student')) {
+      endpoint = this.url.replace('student', 'course');
+    } else {
+      endpoint = this.url;
+    }
+    const headers = DataService.getAuthorizationHeader();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post(endpoint + '/assign', resource, { headers })
       .pipe(catchError(this.handleError));
   }
 
