@@ -1,13 +1,41 @@
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Login</li>
+  </ol>
+</nav>
 <div class="container center-div">
-  <form>
+  <form [formGroup]="form">
     <div class="form-group">
       <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email">
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        id="email"
+        placeholder="Enter email">
+        <div *ngIf="email.touched && email.invalid" class="alert alert-danger">
+          <div *ngIf="email.errors.required">Email is required.</div>
+          <div *ngIf="email.errors.email">Email address is invalid.</div>
+        </div>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
-      <input type="password" class="form-control" id="password" placeholder="Password">
+      <input
+        type="password"
+        class="form-control"
+        formControlName="password"
+        id="password"
+        placeholder="Password"
+        autocomplete>
+        <div *ngIf="password.touched && password.invalid" class="alert alert-danger">
+          <div *ngIf="password.errors.required">Password is required.</div>
+          <div *ngIf="password.errors.minlength">Password should be minimum {{ password.errors.minlength.requiredLength }} characters.</div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-block">Login</button>
+    <button
+      type="submit"
+      class="btn btn-primary btn-block"
+      [disabled]="form.invalid"
+      (click)="signIn()">Sign In</button>
   </form>
 </div>

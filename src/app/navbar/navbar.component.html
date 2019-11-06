@@ -6,24 +6,40 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li routerLinkActive="active" class="nav-item">
-          <a class="nav-link" routerLink="">Home</a>
-        </li>
-        <li routerLinkActive="active" class="nav-item">
-          <a class="nav-link" routerLink="/instructors">Instructors</a>
-        </li>
-        <li routerLinkActive="active" class="nav-item">
-          <a class="nav-link" routerLink="/students">Students</a>
-        </li>
-        <li routerLinkActive="active" class="nav-item">
-          <a class="nav-link" routerLink="/courses">Courses</a>
-        </li>
-        <li routerLinkActive="active" class="nav-item">
-          <a class="nav-link" routerLink="/users">Users</a>
-        </li>
-      </ul>
+    <div class="container-fluid row">
+      <div class="col col-lg-11">
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li routerLinkActive="active" class="nav-item">
+              <a class="nav-link" routerLink="">Home</a>
+            </li>
+            <li *ngIf="authService.isLoggedIn()" routerLinkActive="active" class="nav-item">
+              <a class="nav-link" routerLink="/instructors">Instructors</a>
+            </li>
+            <li *ngIf="authService.isLoggedIn()" routerLinkActive="active" class="nav-item">
+              <a class="nav-link" routerLink="/students">Students</a>
+            </li>
+            <li *ngIf="authService.isLoggedIn()" routerLinkActive="active" class="nav-item">
+              <a class="nav-link" routerLink="/courses">Courses</a>
+            </li>
+            <li *ngIf="authService.isLoggedIn()" routerLinkActive="active" class="nav-item">
+              <a class="nav-link" routerLink="/users">Users</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col col-lg-1 float-right">
+        <button
+          *ngIf="!authService.isLoggedIn()"
+          type="button"
+          class="btn btn-sm btn-dark"
+          (click)="onSignIn()">Login</button>
+        <button
+          *ngIf="authService.isLoggedIn()"
+          type="button"
+          class="btn btn-sm btn-danger"
+          (click)="onSignOut()">Logout</button>
+      </div>
     </div>
   </nav>
 </div>

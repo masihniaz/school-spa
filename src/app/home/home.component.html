@@ -1,1 +1,18 @@
-<p>home works!</p>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Home</li>
+  </ol>
+</nav>
+
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col col-lg-11">
+        <h5>Overview</h5>
+      </div>
+      <div *ngIf="authService.isLoggedIn()" class="col col-lg-1 float-right">
+        <h6>{{ authService.currentUser.name }}</h6>
+      </div>
+    </div>
+  </div>
+</div>
