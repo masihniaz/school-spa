@@ -31,6 +31,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { SummaryPipe } from './pipes/summary.pipe';
 import { FooterComponent } from './footer/footer.component';
+import { AuthGuard } from './services/auth.guard';
 
 @NgModule({
   declarations: [
@@ -63,34 +64,42 @@ import { FooterComponent } from './footer/footer.component';
       },
       {
         path: 'students/:id',
-        component: StudentProfileComponent
+        component: StudentProfileComponent,
+        canActivate: [AuthGuard]
       },
       { path: 'students',
-        component: StudentsComponent
+        component: StudentsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'instructors/:id',
-        component: InstructorProfileComponent
+        component: InstructorProfileComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'instructors',
-        component: InstructorsComponent
+        component: InstructorsComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'courses/:id',
-        component: CourseProfileComponent
+        component: CourseProfileComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'courses',
-        component: CoursesComponent
+        component: CoursesComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'users/:id',
-        component: UserProfileComponent
+        component: UserProfileComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'users',
-        component: UsersComponent
+        component: UsersComponent,
+        canActivate: [AuthGuard]
       },
       { path: '',
         component: HomeComponent,
@@ -109,6 +118,7 @@ import { FooterComponent } from './footer/footer.component';
     CourseService,
     UserService,
     DataService,
+    AuthGuard,
     { provide: ErrorHandler, useClass: AppErrorHandler} // instead of default error handler use custom error handler
   ],
   bootstrap: [AppComponent]
