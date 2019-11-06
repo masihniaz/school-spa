@@ -20,6 +20,20 @@ export class DataService {
     return new HttpHeaders().set('Authorization', 'Bearer ' + token);
   }
 
+  public static handleError(error: Response) {
+    const { status } = error;
+    if (status === 400) {
+      return throwError(new BadInput());
+    } else if (status === 401) {
+      return throwError(new UnauthorizedError());
+    } else if (status === 404) {
+      return throwError(new NotFoundError());
+    } else if (status === 409) {
+      return throwError(new ConflictError());
+    }
+    return throwError(new AppError(error));
+  }
+
   constructor(private url: string, private http: HttpClient) { }
 
   getAll(option?: string) {
@@ -99,17 +113,4 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  private handleError(error: Response) {
-    const { status } = error;
-    if (status === 400) {
-      return throwError(new BadInput(error));
-    } else if (status === 401) {
-      return throwError(new UnauthorizedError());
-    } else if (status === 404) {
-      return throwError(new NotFoundError());
-    } else if (status === 409) {
-      return throwError(new ConflictError());
-    }
-    return throwError(new AppError(error));
-  }
 }
