@@ -6,6 +6,8 @@ import { BadInput } from '../common/bad-input';
 import { AppError } from '../common/app-error';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { UnauthorizedError } from '../common/unauthorized-error';
+import { ConflictError } from '../common/conflict-error';
 
 
 @Injectable({
@@ -97,8 +99,12 @@ export class DataService {
     const { status } = error;
     if (status === 400) {
       return throwError(new BadInput(error.json()));
+    } else if (status === 401) {
+      return throwError(new UnauthorizedError());
     } else if (status === 404) {
       return throwError(new NotFoundError());
+    } else if (status === 409) {
+      return throwError(new ConflictError());
     }
     return throwError(new AppError(error));
   }
