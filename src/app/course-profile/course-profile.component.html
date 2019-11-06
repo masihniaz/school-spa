@@ -93,7 +93,11 @@
           </div>
         </div>
       </div>
-      <button type="submit" class="btn btn-primary">Update</button>
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="form.invalid"
+        (click)="onUpdate()">Update</button>
     </form>
   </div>
 </div>

@@ -57,6 +57,14 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  // update student with the new data
+  onUpdate() {
+    this.service.patch(this.form.value)
+      .subscribe(response => {
+        this.user = response;
+      });
+  }
+
   // getter functions to access properties easily on the view
   get id() {
     return this.form.get('id');

@@ -58,8 +58,12 @@ export class DataService {
   }
 
   patch(resource) {
+    const id = resource.id;
+    delete resource.id;
+    const endpoint = `${this.url}/${id}`;
     const headers = DataService.getAuthorizationHeader();
-    return this.http.patch(this.url + '/' + resource.id, JSON.stringify(resource), { headers })
+    headers.append('Content-Type', 'application/json');
+    return this.http.patch(endpoint, resource, { headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -98,7 +102,7 @@ export class DataService {
   private handleError(error: Response) {
     const { status } = error;
     if (status === 400) {
-      return throwError(new BadInput(error.json()));
+      return throwError(new BadInput(error));
     } else if (status === 401) {
       return throwError(new UnauthorizedError());
     } else if (status === 404) {

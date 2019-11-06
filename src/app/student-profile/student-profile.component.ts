@@ -87,8 +87,12 @@ export class StudentProfileComponent implements OnInit {
       });
   }
 
+  // update student with the new data
   onUpdate() {
-
+    this.service.patch(this.form.value)
+      .subscribe(response => {
+        this.student = response;
+      });
   }
 
   private updateFormValues() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CourseService } from '../services/course.service';
+import { resource } from 'selenium-webdriver/http';
 
 @Component({
   selector: 'app-course-profile',
@@ -79,6 +80,14 @@ export class CourseProfileComponent implements OnInit {
       .subscribe(response => {
         this.students.splice(index, 1);
         this.showDeleted = true;
+      });
+  }
+
+  // update course with the new data
+  onUpdate() {
+    this.service.patch(this.form.value)
+      .subscribe(response => {
+        this.course = response;
       });
   }
 

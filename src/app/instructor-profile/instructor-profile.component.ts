@@ -80,8 +80,12 @@ export class InstructorProfileComponent implements OnInit {
 
   }
 
+  // update instructor with the new data
   onUpdate() {
-
+    this.service.patch(this.form.value)
+      .subscribe(response => {
+        this.instructor = response;
+      });
   }
 
   private updateFormValues() {
