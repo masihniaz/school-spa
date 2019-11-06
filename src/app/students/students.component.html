@@ -53,7 +53,7 @@
                   class="btn btn-warning"
                   data-toggle="modal"
                   data-target="#assignModal"
-                  (click)="showAssignModal=true">Assign Course</button>
+                  (click)="showAssignModal=true; studentId=student.id">Assign Course</button>
             </div>
             <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
                 <button class="btn btn-danger" (click)="onDelete(student.id, i)">Delete</button>
@@ -221,7 +221,7 @@
                   id="selectedCourse"
                   formControlName="selectedCourse">
                     <option value=""></option>
-                    <option *ngFor="let course of allCourses" value="course.id">{{ course.name }}</option>
+                    <option *ngFor="let course of allCourses" value="{{course.id}}">{{ course.name }}</option>
                   </select>
                 <div *ngIf="selectedCourse.touched && selectedCourse.invalid" class="alert alert-danger">
                   <div *ngIf="selectedCourse.errors.required"> Course is required.</div>
@@ -241,7 +241,7 @@
           (click)="showAssignModal=false; assignForm.reset()">Close</button>
         <button
           type="button"
-          class="btn btn-primary" [disabled]="assignForm.invalid" (click)="onAssign('a')">Assign</button>
+          class="btn btn-primary" [disabled]="assignForm.invalid" (click)="onAssign()">Assign</button>
       </div>
     </div>
   </div>
@@ -258,4 +258,9 @@
 <div class="alert alert-success alert-dismissible fade show" [ngClass]="{ show: showCreated}">
     Student added.
     <button type="button" class="close" data-dismiss="alert" (click)="showCreated=false">&times;</button>
+</div>
+
+<div class="alert alert-success alert-dismissible fade show" [ngClass]="{ show: showAdded}">
+    Course assigned to student.
+    <button type="button" class="close" data-dismiss="alert" (click)="showAdded=false">&times;</button>
 </div>

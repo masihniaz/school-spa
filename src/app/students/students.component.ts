@@ -11,10 +11,12 @@ import * as moment from 'moment';
 })
 export class StudentsComponent implements OnInit {
   students: any[];
+  studentId: number;
   showAssignModal = false;
   showModal = false;
   showDeleted = false;
   showCreated = false;
+  showAdded = false;
   allCourses: any[];
   form = new FormGroup({
     name: new FormControl('', [
@@ -65,7 +67,6 @@ export class StudentsComponent implements OnInit {
         this.service.getAll('course')
           .subscribe(response2 => {
             this.allCourses = (response2 as any[]);
-            console.log(this.allCourses);
           });
 
       });
@@ -85,9 +86,18 @@ export class StudentsComponent implements OnInit {
       });
   }
 
-  onAssign(studentId) {
-    // const resource = { studentId, courseId: this.courseId };
-    // this.service.assign()
+  onAssign() {
+    const resource = {
+      studentId: this.studentId,
+      courseId: this.assignForm.value.selectedCourse
+    };
+    this.service.assign(resource)
+      .subscribe(
+        (response) => {
+          this.showAssignModal = false;
+          this.showAdded = true;
+        }
+      );
   }
 
   // create new student by calling the API
