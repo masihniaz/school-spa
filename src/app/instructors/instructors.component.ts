@@ -11,9 +11,13 @@ import * as moment from 'moment';
 })
 export class InstructorsComponent implements OnInit {
   instructors: any[];
+  instructorId: number;
+  showAssignModal = false;
   showModal = false;
   showDeleted = false;
   showCreated = false;
+  showAdded = false;
+  allCourses: any[];
   form = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -46,6 +50,12 @@ export class InstructorsComponent implements OnInit {
     ])
   });
 
+  assignForm = new FormGroup({
+    selectedCourse: new FormControl('', [
+      Validators.required
+    ])
+  });
+
   constructor(private service: InstructorService,
               private router: Router) { }
 
@@ -53,6 +63,12 @@ export class InstructorsComponent implements OnInit {
     this.service.getAll()
       .subscribe(response => {
         this.instructors = (response as any[]);
+
+        this.service.getAll('course')
+        .subscribe(response2 => {
+          this.allCourses = (response2 as any[]);
+        });
+
       });
   }
 
@@ -67,6 +83,21 @@ export class InstructorsComponent implements OnInit {
         this.instructors.splice(index, 1);
         this.showDeleted = true;
       });
+  }
+
+  // assign lecturer to course
+  onAssign() {
+    const resource = {
+      instructorId: this.instructorId,
+      courseId: this.assignForm.value.selectedCourse
+    };
+    this.service.assign(resource)
+      .subscribe(
+        (response) => {
+          this.showAssignModal = false;
+          this.showAdded = true;
+        }
+      );
   }
 
   // create new instructor by calling the API
@@ -105,6 +136,10 @@ export class InstructorsComponent implements OnInit {
 
   get birthday() {
     return this.form.get('birthday');
+  }
+
+  get selectedCourse() {
+    return this.assignForm.get('selectedCourse');
   }
 
 }

@@ -54,7 +54,7 @@ export class StudentsComponent implements OnInit {
     selectedCourse: new FormControl('', [
       Validators.required
     ])
-  })
+  });
 
   constructor(private service: StudentService,
               private router: Router) { }

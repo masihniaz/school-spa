@@ -38,19 +38,21 @@ export class DataService {
 
   getAll(option?: string) {
     let endpoint = '';
-    if(option === 'course') {
+    if (option === 'course' && this.url.includes('student')) {
       endpoint = this.url.replace('student', 'course');
+    } else if (option === 'course' && this.url.includes('instructor')) {
+      endpoint = this.url.replace('instructor', 'course');
     } else {
       endpoint = this.url;
     }
     const headers = DataService.getAuthorizationHeader();
     return this.http.get(endpoint + 's', { headers })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(DataService.handleError));
   }
 
   getOne(id, option?: string) {
     let additional = '/';
-    if(option === 'students') {
+    if (option === 'students') {
       additional += option;
     } else if (option === 'courses') {
       additional += option;
@@ -61,14 +63,14 @@ export class DataService {
     console.log('ENDPOINT:: ',endpoint);
     const headers = DataService.getAuthorizationHeader();
     return this.http.get(endpoint, { headers })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(DataService.handleError));
   }
 
   create(resource) {
     const headers = DataService.getAuthorizationHeader();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this.url, resource, { headers })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(DataService.handleError));
   }
 
   patch(resource) {
@@ -78,18 +80,18 @@ export class DataService {
     const headers = DataService.getAuthorizationHeader();
     headers.append('Content-Type', 'application/json');
     return this.http.patch(endpoint, resource, { headers })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(DataService.handleError));
   }
 
   delete(id) {
     const headers = DataService.getAuthorizationHeader();
     return this.http.delete(this.url + '/' + id, { headers })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(DataService.handleError));
   }
 
   unassign(resource) {
     let endpoint = '';
-    if(this.url.indexOf('student')) {
+    if (this.url.indexOf('student')) {
       endpoint = this.url.replace('student', 'course');
     } else {
       endpoint = this.url;
@@ -97,12 +99,12 @@ export class DataService {
     const headers = DataService.getAuthorizationHeader();
     headers.append('Content-Type', 'application/json');
     return this.http.post(endpoint + '/unassign', resource, { headers })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(DataService.handleError));
   }
 
   assign(resource) {
     let endpoint = '';
-    if(this.url.indexOf('student')) {
+    if ( this.url.indexOf('student')) {
       endpoint = this.url.replace('student', 'course');
     } else {
       endpoint = this.url;
@@ -110,7 +112,7 @@ export class DataService {
     const headers = DataService.getAuthorizationHeader();
     headers.append('Content-Type', 'application/json');
     return this.http.post(endpoint + '/assign', resource, { headers })
-      .pipe(catchError(this.handleError));
+      .pipe(catchError(DataService.handleError));
   }
 
 }

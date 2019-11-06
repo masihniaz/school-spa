@@ -49,6 +49,14 @@
                 <button class="btn btn-info" (click)="onView(instructor.id)">View</button>
             </div>
             <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
+              <button
+                class="btn btn-warning"
+                data-toggle="modal"
+                data-target="#assignModal"
+                (click)="showAssignModal=true; instructorId=instructor.id">Assign Course
+              </button>
+            </div>
+            <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Second group">
                 <button class="btn btn-danger" (click)="onDelete(instructor.id, i)">Delete</button>
             </div>
           </div>
@@ -179,11 +187,70 @@
           (click)="showModal=false; form.reset();">Close</button>
         <button
           type="button"
-          class="btn btn-primary" [disabled]="form.invalid" (click)="onCreate()">Create</button>
+          class="btn btn-primary"
+          [disabled]="form.invalid"
+          (click)="onCreate()">Create
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- modal component for assigning course -->
+<div class="modal fade" id="assignModal" [ngClass]="{'show': showAssignModal}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">Assign course</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="showAssignModal=false; assignForm.reset()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- modal body -->
+      <div class="modal-body">
+        <form [formGroup]="assignForm">
+          <div class="form-group">
+            <div class="row">
+              <div class="col">
+                <label for="selectedCourse">Course</label>
+                <select
+                  class="form-control"
+                  id="selectedCourse"
+                  formControlName="selectedCourse">
+                    <option value=""></option>
+                    <option *ngFor="let course of allCourses" value="{{course.id}}">{{ course.name }}</option>
+                  </select>
+                <div *ngIf="selectedCourse.touched && selectedCourse.invalid" class="alert alert-danger">
+                  <div *ngIf="selectedCourse.errors.required"> Course is required.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- modal body end -->
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="showAssignModal=false; assignForm.reset()">Close</button>
+        <button
+          type="button"
+          class="btn btn-primary" [disabled]="assignForm.invalid" (click)="onAssign()">Assign</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 <div class="alert alert-warning alert-dismissible fade show" [ngClass]="{ show: showDeleted}">
   Instructor deleted!.
@@ -193,4 +260,9 @@
 <div class="alert alert-success alert-dismissible fade show" [ngClass]="{ show: showCreated}">
     Instructor added.
     <button type="button" class="close" data-dismiss="alert" (click)="showCreated=false">&times;</button>
+</div>
+
+<div class="alert alert-success alert-dismissible fade show" [ngClass]="{ show: showAdded}">
+    Course assigned to instructor.
+    <button type="button" class="close" data-dismiss="alert" (click)="showAdded=false">&times;</button>
 </div>
