@@ -17,7 +17,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Installing & running the project
 
 1. Make sure node.js is installed.
-2. Clone the server from [School Web Services API](https://github.com/masihniaz/school-web-api) then follow the instructions in the `README.md` file.
+2. Clone the latest server files from [School Web Services API](https://github.com/masihniaz/school-web-api) then follow the instructions in the `README.md` file.
 3. Run ```npm install``` in the root directory of `school-spa` app
 4. Run `ng serve -o` for a dev server & open link in browser.
 
