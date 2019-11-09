@@ -24,8 +24,9 @@ export class AuthService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     return this.http.post(this.url, credentials, { headers })
       .pipe(map(response => {
-        if (response && response.token) {
-          localStorage.setItem('token', response.token);
+        const res = (response as any);
+        if (res && res.token) {
+          localStorage.setItem('token', res.token);
           return true;
         }
         return false;
